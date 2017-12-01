@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title> Stationary Troxler Effect - Michael L. Smith </title>
+
+	<script src="two.js"></script>
+	<script src="math.js"></script>
+
+</head>
+<body>
+
+	<div id="main"></div>
+	<script src="main.js"></script>
+
+	<script type="text/javascript">
+	function getPositions(angle, radToCircle) {
+	    return {
+	        x: Math.cos(angle * Math.PI / 180) * radToCircle,
+	        y: Math.sin(angle * Math.PI / 180) * radToCircle
+	    };
+	}
+	</script>
+
+	<script type="text/javascript">
+		function createCircles(xOffset, yOffset) {
+			var circles = {}
+			for (var i = 0; i < 12; i++) {
+				var angle = 15 + i * 30;
+				var pos = getPositions(angle, radToCircle);
+				var circle = two.makeCircle(xOffset + pos.x, yOffset + pos.y, radius)
+				circle.fill = '#E8FAE8';
+				circle.linewidth = 4;
+				circle.stroke = '#FFFFFF';
+				circles[i] = circle;
+			}
+
+			return circles;
+		};
+
+	</script>
+
+	<script type="text/javascript">
+		function toggleColors(circle) {
+			var color = circle.fill;
+			circle.fill = (color == '#FFFFCC' ? '#FFFFFF' : '#FFFFCC');
+			two.update()
+		}
+	</script>
+
+	<script type="text/javascript">
+		function returnToColor(circle) {
+			toggleColors(circles[i])
+			i++;
+			i = i % 12;
+		}
+	</script>
+
+
+	<script type="text/javascript">
+	var xStatOffset   = 600,
+		yOffset       = 300,
+		radToCircle   = 200,
+		radius 	      = 35;
+
+	var stationaryCircles = createCircles(xStatOffset, yOffset)
+	var line1 = two.makeLine(xStatOffset,yOffset-10,xStatOffset,yOffset+10);
+	var line2 = two.makeLine(xStatOffset-10, yOffset, xStatOffset+10, yOffset);
+
+	line1.linewidth = 3;
+	line2.linewidth = 3;
+
+	two.update();
+
+	</script>
+
+
+
+</body>
+</html>
