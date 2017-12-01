@@ -10,21 +10,14 @@
 </head>
 <body>
 
-	<script type="text/javascript">
-	var two = new Two({
-		fullscreen: true
-	});
-	</script>
-
-
 	<div id="main"></div>
 	<script src="main.js"></script>
 
 	<script type="text/javascript">
-	function getPositions(angle, orbit) {
+	function getPositions(angle, radToCircle) {
 	    return {
-	        x: Math.cos(angle * Math.PI / 180) * orbit,
-	        y: Math.sin(angle * Math.PI / 180) * orbit
+	        x: Math.cos(angle * Math.PI / 180) * radToCircle,
+	        y: Math.sin(angle * Math.PI / 180) * radToCircle
 	    };
 	}
 	</script>
@@ -34,12 +27,11 @@
 			var circles = {}
 			for (var i = 0; i < 12; i++) {
 				var angle = 15 + i * 30;
-				var pos = getPositions(angle, orbit);
+				var pos = getPositions(angle, radToCircle);
 				var circle = two.makeCircle(xOffset + pos.x, yOffset + pos.y, radius)
-				circle.fill = '#FEFFB1';
+				circle.fill = '#FFFFCC';
 				circle.linewidth = 4;
-				circle.stroke = '#FEFFB1';
-
+				circle.stroke = '#FFFFFF';
 				circles[i] = circle;
 				two.update()
 			}
@@ -53,8 +45,7 @@
 	<script type="text/javascript">
 		function toggleColors(circle) {
 			var color = circle.fill;
-			circle.fill = (color == '#FEFFB1' ? '#FFFFFF' : '#FEFFB1');
-			circle.stroke = circle.fill;
+			circle.fill = (color == '#FFFFCC' ? '#FFFFFF' : '#FFFFCC');
 			two.update()
 		}
 	</script>
@@ -67,28 +58,22 @@
 		}
 	</script>
 
-
+	
 	<script type="text/javascript">
-	var xOffset = 700,
-		yOffset = 300,
-		orbit   = 200;
-		radius 	= 35;
+	var xOffset       = 600,
+		yOffset       = 300,
+		radToCircle   = 200;
+		radius 	      = 35;
 
 	var circles = createCircles()
 	var line1 = two.makeLine(xOffset,yOffset-10,xOffset,yOffset+10);
 	var line2 = two.makeLine(xOffset-10, yOffset, xOffset+10, yOffset);
-
+	line1.linewidth = 3;
+	line2.linewidth = 3;
 
 	two.update();
 
-	// Add illusion of motion
-	// i = 0
-	// while (true) {
-	// 	var changeColor = setTimeout("toggleColors(circles[i])", 500);
-	// 	toggleColors(circles[i])
-
-
-	// }
+	// Add the illusion of motion
 	var i = 0;
 	var intervalFunctions = [toggleColors, returnToColor];
 	var intervalIndex = 0
