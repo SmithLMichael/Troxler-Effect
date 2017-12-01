@@ -7,6 +7,10 @@
 	<script src="two.js"></script>
 	<script src="math.js"></script>
 
+	<script type="text/javascript">
+		const circle_color = '#FFFFD6'
+	</script>
+
 </head>
 <body>
 
@@ -29,7 +33,7 @@
 				var angle = 15 + i * 30;
 				var pos = getPositions(angle, radToCircle);
 				var circle = two.makeCircle(xOffset + pos.x, yOffset + pos.y, radius)
-				circle.fill = '#FFFFCC';
+				circle.fill = circle_color;
 				circle.linewidth = 4;
 				circle.stroke = '#FFFFFF';
 				circles[i] = circle;
@@ -43,7 +47,7 @@
 	<script type="text/javascript">
 		function toggleColors(circle) {
 			var color = circle.fill;
-			circle.fill = (color == '#FFFFCC' ? '#FFFFFF' : '#FFFFCC');
+			circle.fill = (color == circle_color ? '#FFFFFF' : circle_color);
 			two.update()
 		}
 	</script>
